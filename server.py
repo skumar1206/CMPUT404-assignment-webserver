@@ -36,6 +36,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
         request_data = self.data.decode().split()
 
         if (request_data[0] == 'GET'):
+            #handling test_get_group case
             if (request_data[1][0:3] == '/..'):
                 self.request.sendall(bytearray("HTTP/1.1 404 - Page not found\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n",'utf-8'))
             #checking if it is a directory
