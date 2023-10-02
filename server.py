@@ -36,7 +36,7 @@ class MyWebServer(socketserver.BaseRequestHandler):
         request_data = self.data.decode().split()
 
         if (request_data[0] == 'GET'):
-            if (request_data[1][0:2] == '..'):
+            if (request_data[1][0:3] == '/..'):
                 self.request.sendall(bytearray("HTTP/1.1 404 - Page not found\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n",'utf-8'))
             #checking if it is a directory
             # Reference #1 in README.md: Method 3 on this page: https://www.geeksforgeeks.org/python-check-if-a-file-or-directory-exists-2/
