@@ -36,9 +36,11 @@ class MyWebServer(socketserver.BaseRequestHandler):
         request_data = self.data.decode().split()
 
         if (request_data[0] == 'GET'):
+            if (request_data[1][0:2] == '..'):
+                self.request.sendall(bytearray("HTTP/1.1 404 - Page not found\r\nContent-Type: text/html; charset=UTF-8\r\n\r\n",'utf-8'))
             #checking if it is a directory
             # Reference #1 in README.md: Method 3 on this page: https://www.geeksforgeeks.org/python-check-if-a-file-or-directory-exists-2/
-            if os.path.isdir("www" + request_data[1]):
+            elif os.path.isdir("www" + request_data[1]):
                 #checking if the path is correctly specified for the directory
                 if (request_data[1][-1] != '/'):
                     # Reference #3 in README.md: for understanding http response format: https://docs.netscaler.com/en-us/citrix-adc/current-release/appexpert/http-callout/http-request-response-notes-format.html
